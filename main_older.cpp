@@ -95,7 +95,7 @@ void PrintGPU() {
     IWbemServices* pSvc = NULL;
     BSTR namespacePath = SysAllocString(L"ROOT\\CIMV2");
     hr = pLoc->ConnectServer(namespacePath, NULL, NULL, NULL, 0, NULL, NULL, &pSvc);
-    SysFreeString(namespacePath); // ✅ Free right after use
+    SysFreeString(namespacePath);
     pLoc->Release();
 
     if (FAILED(hr)) {
@@ -112,7 +112,7 @@ void PrintGPU() {
                          WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
                          NULL, &pEnumerator);
 
-    SysFreeString(queryLang);  // ✅ Always free your BSTRs
+    SysFreeString(queryLang);
     SysFreeString(queryText);
 
     if (FAILED(hr)) {
